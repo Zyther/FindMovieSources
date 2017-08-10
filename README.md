@@ -1,5 +1,5 @@
 # FindMovieSources
-FindMovieSources -- An easy way to find legit sources for movies. [Halp]
+FindMovieSources -- An easy way to find legit sources for movies. [Halp](#Halp)
 
 ## IMPORTANT!!!!
 * All API keys have been replaced with `REDACTED` or `redacted`
