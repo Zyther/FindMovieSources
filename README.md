@@ -7,6 +7,7 @@ I make no money on this project, and host it myself. I wrote it because I needed
 ## IMPORTANT!!!!
 * All API keys have been replaced with `REDACTED` or `redacted`
 * These APIs are all free, so please don't be an *** and just tell me if you find an API key. 
+* most of `views/` is obsolete. See `webapp/`
 
 ## Install Notes
 * `npm install`
