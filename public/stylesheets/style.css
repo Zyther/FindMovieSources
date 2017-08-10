@@ -1,0 +1,72 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.aligncenter {
+  text-align: center;
+}
+.whiter {text-align:left!important; }
+
+.alignleft { border-bottom: whitesmoke 3px solid; }
+
+.borderBottom {
+  /*
+  border-bottom: black 1px solid;
+  */
+
+}
+
+.borderA {
+/*  border: black 1px solid; */
+}
+hr {
+border-top: 1px solid #aeaeae !important;
+margin-top: 10px !important;
+margin-bottom: 5px !important;
+}
+.fullwidth {
+  width: 100%;
+}
+.paddingSome {
+  padding-left: 20px;
+  padding-right:20px;
+}
+
+
+.iLabel {
+  vertical-align: top;
+  width:25%;
+}
+
+#thePOP {
+  background-color: #ececec;
+  padding: 30px;
+  width: 750px;
+}
+
+#theForm {
+                width:50%;
+                margin:10px auto;
+}
+#theInput {
+                padding:8px 15px;
+                width: 80%;
+                background:rgba(50, 50, 50, 0.2);
+                border:0px solid #dbdbdb;
+}
+#theButton {
+                position:relative;
+                padding:6px 15px;
+                left:-8px;
+                border:2px solid #207cca;
+                background-color:#207cca;
+                color:#fafafa;
+}
+theButton:hover  {
+                background-color:#fafafa;
+                color:#207cca;
+}

@@ -1,0 +1,60 @@
+<% if(rez.error) { %><% if (rez.error.toString().startsWith('To filter shows by a specific channel, you must select a correct channel.')) { %><h3>No Results!</h3><% } } else { %>
+<div class="row">
+    <h3 class="text-center" id="aTitle"><%=rez.title%></h3>
+    <div class="col-xs-3">
+        <% if (rez.poster_240x342) { %>
+        <img src="<%=rez.poster_240x342%>" width="100%"/>
+        <% } else if (rez.poster) { %>
+        <img src="<%=rez.poster%>" width="100%"/>
+        <% } %>
+    </div>
+    <div class="col-xs-6">
+        <table>
+            <tbody>
+            <% if (rez.id) { %>
+            <tr><td class="ilabel">ID:</td><td id="theGID"><%=rez.id%></td></tr>
+            <% } %>
+            <% if (rez.status) { %>
+            <tr><td class="iLabel">Status:</td><td><%=rez.status%></td></tr>
+            <% } %>
+            </tbody>
+        </table>
+        <% if (rez.overview) { %>
+        <%=rez.overview%>
+        <% } %>
+
+        <!-- <%= JSON.stringify(rez) %> -->
+    </div>
+</div>
+<h4>Sources</h4>
+<div id="theSources">
+<% if (rez.free_web_sources) { %>
+<div class="row">
+    <% rez.free_web_sources.forEach(function(entry) { %>
+    <b>Free:</b> <a href="<%=entry.link%>" target="_blank"><%=entry.display_name%></a><br />
+    <% }); %>
+</div>
+<% } %>
+<% if (rez.tv_everywhere_web_sources) { %>
+<div class="row">
+    <% rez.tv_everywhere_web_sources.forEach(function(entry) { %>
+    <b>TV Everywhere:</b> <a href="<%=entry.link%>" target="_blank"><%=entry.display_name%></a><br />
+    <% }); %>
+</div>
+<% } %>
+<% if (rez.subscription_web_sources) { %>
+<div class="row">
+    <% rez.subscription_web_sources.forEach(function(entry) { %>
+    <b>Subscription:</b> <a href="<%=entry.link%>" target="_blank"><%=entry.display_name%></a><br />
+    <% }); %>
+</div>
+<% } %>
+<% if (rez.purchase_web_sources) { %>
+<div class="row">
+    <% rez.purchase_web_sources.forEach(function(entry) { %>
+    <b>Purchase:</b> <a href="<%=entry.link%>" target="_blank"><%=entry.display_name%></a><br />
+    <% }); %>
+</div>
+<% } %>
+</div>
+<% } %>

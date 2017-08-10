@@ -1,0 +1,56 @@
+<% if (res.Search) {  var rSearch = res.Search; %>
+<div class="container">
+    <div class="row borderSome">
+        <div class="col-xs-6">
+            <h2>TV</h2>
+            <hr>
+            <% var tI=0; rSearch.forEach(function(e,i,d){   if(e.Type == "series") { tI++;%>
+            <div class="row">
+                <div class="col-xs-3 borderA">
+                    <% if (e.Poster === "N/A") { %>
+                    <img src="https://assets.tmdb.org/assets/redacted/images/no-poster-w185-v2.png" width='100%' />
+                    <% } else { %>
+                    <img src="<%=e.Poster%>" width="100%" />
+                    <% } %>
+                </div>
+                <div class="col-xs-9 borderA text-left">
+                    <h3 class="text-center"><u><%=e.Title%></u></h3>
+                    <b>Year(s): </b><%=e.Year%><br />
+                    <b>IMDB: </b><%=e.imdbID%>
+
+                </div>
+
+            </div>
+            <hr>
+            <% } }); %>
+            <%= tI %>
+        </div>
+        <div class="col-xs-6">
+            <h2>Movies</h2>
+            <hr>
+            <% var tI=0; rSearch.forEach(function(e,i,d){   if(e.Type == "movie") { tI++;%>
+            <div class="row">
+                <div class="col-xs-3 borderA">
+                    <% if (e.Poster === "N/A") { %>
+                    <img src="https://assets.tmdb.org/assets/redacted/images/no-poster-w185-v2.png" width='100%' />
+                    <% } else { %>
+                    <img src="<%=e.Poster%>" width="100%" />
+                    <% } %>
+                </div>
+                <div class="col-xs-9 borderA text-left">
+                    <h3 class="text-center"><u><%=e.Title%></u></h3>
+                    <b>Year(s): </b><%=e.Year%><br />
+                    <b>IMDB: </b><%=e.imdbID%>
+
+                </div>
+
+            </div>
+            <hr>
+            <% } }); %>
+            <%= tI %>
+        </div>
+    </div>
+</div>
+<% } else { %>
+<h3>No Results!</h3>
+<% } %>

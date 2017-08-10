@@ -1,0 +1,7 @@
+<% if (rez.result) { %>
+<b>Subscription: </b>Netflix<br />
+<% if (rez.countries) {  %>
+<i>Countries:</i> <%=rez.countries.toString(); %><%  } %>
+<% } else { %>
+<b>Not Found on Netflix.</b>
+<% } %>

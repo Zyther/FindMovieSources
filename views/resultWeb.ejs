@@ -1,0 +1,103 @@
+<div class='container'>
+  <div class="row paddingsome">
+    <div class="col-xs-6">
+      <div class='borderBottom'>
+        <h3>TV</h3>
+        <hr />
+      </div>
+      <% if (res.tv.length > 0) { %>
+      <% res.tv.forEach(function(entry) { %>
+      <div class='borderA'>
+        <div class="text-center hoverIT">
+          <h4><u><%= entry.name %></u><% if (entry.original_language.length > 0){%> (<%=entry.original_language%>)<%}%></h4>
+        </div>
+        <div class='row'>
+          <div class='col-xs-3 borderA'>
+            <% if (entry.poster_path) { %>
+            <img src="http://image.tmdb.org/t/p/w185<%=entry.poster_path%>" width='100%' />
+            <% } else { %>
+            <img src="https://assets.tmdb.org/assets/redacted/images/no-poster-w185-v2.png" width='100%' />
+            <% } %>
+          </div>
+          <div class='col-xs-9 borderA text-left'>
+            <table><tbody>
+              <% if (entry.id) { %>
+              <tr><td class='iLabel'>ID:</td><td><%=entry.id%></td></tr>
+              <% } %>
+              <% if (entry.vote_average) { %>
+              <tr><td class='iLabel'>Avg. Rating:</td><td><%=entry.vote_average%> out of 10 (<%=entry.vote_count%> Reviews)</td></tr>
+              <% } %>
+              <% if (entry.first_air_date) { %>
+              <tr><td class='iLabel'>First Aired:</td><td><%=entry.first_air_date%></td></tr>
+              <% } %>
+              <% if (entry.overview) { %>
+              <tr><td class='iLabel'>Overview:</td><td><%=entry.overview.substring(0,252)%><sub>[...]</sub></td></tr>
+              <% } %>
+              </tbody></table><br />
+            <div class="text-center">
+              <div class="btn btn-default fullwidth sButton thePOP_open" role="button" onclick='popTV(<%=entry.id%>)'>Find on a Video Service...</div>
+            </div>
+            <!-- <%= JSON.stringify(entry,'\r\n',4) %> -->
+          </div>
+        </div>
+        <hr />
+      </div>
+      <% }); %>
+
+
+      <% } else { %>
+      <i>No Results!</i>
+      <% } %>
+
+    </div>
+    <div class="col-xs-6">
+      <div class='borderBottom'>
+        <h3>Movies</h3>
+        <hr />
+      </div>
+      <% if (res.mv.length > 0) { %>
+      <% res.mv.forEach(function(entry){ %>
+      <div class="borderA">
+        <div class="text-center hoverIT">
+          <h4><u><%=entry.title%></u><% if (entry.original_language.length > 0) { %> (<%=entry.original_language%>)<%}%></h4>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 borderA">
+            <% if (entry.poster_path) { %>
+            <img src="http://image.tmdb.org/t/p/w185<%=entry.poster_path%>" width="100%" />
+            <% } else { %>
+            <img src="https://assets.tmdb.org/assets/redacted/images/no-poster-w185-v2.png" width='100%' />
+            <% } %>
+          </div>
+          <div class="col-xs-9 borderA text-left">
+            <table><tbody>
+              <% if (entry.id) { %>
+              <tr><td class='iLabel'>ID:</td><td><%=entry.id%></td></tr>
+              <% } %>
+              <% if (entry.vote_average) { %>
+              <tr><td class='iLabel'>Avg. Rating:</td><td><%=entry.vote_average%> out of 10 (<%=entry.vote_count%> Reviews)</td></tr>
+              <% } %>
+              <% if (entry.release_date) { %>
+              <tr><td class='iLabel'>First Aired:</td><td><%=entry.release_date%></td></tr>
+              <% } %>
+              <% if (entry.overview) { %>
+              <tr><td class='iLabel'>Overview:</td><td><%=entry.overview.substring(0,252)%><sub>[...]</sub></td></tr>
+              <% } %>
+              </tbody></table><br />
+            <div class="text-center">
+              <div class="btn btn-default fullwidth sButton thePOP_open" role="button" onclick='popMov(<%=entry.id%>)'>Find on a Video Service...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <! -- <%= JSON.stringify(entry, null, 4) %> -->
+      <hr />
+      <% }); %>
+      <% } else { %>
+      <i>No Results!</i>
+      <% } %>
+    </div>
+
+  </div>
+</div>

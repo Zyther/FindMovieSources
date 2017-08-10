@@ -1,0 +1,30 @@
+<% var theEpisodes = rez.results.web.episodes;  theSources = theEpisodes.all_sources; %>
+<% if (theEpisodes.free > 0) { %>
+<% theSources.forEach(function(entry) { %>
+<% if (entry.type === 'free') { %>
+<b>Free:</b> <%= entry.display_name %><br />
+<% } %>
+<% }); %>
+<% } %>
+<% if (theEpisodes.tv_everywhere > 0) { %>
+<% theSources.forEach(function(entry) { %>
+<% if (entry.type === 'tv_everywhere') { %>
+<b>TV Everywhere:</b> <%= entry.display_name %><br />
+<% } %>
+<% }); %>
+<% } %>
+<% if (theEpisodes.paid > 0 ) { %>
+<% theSources.forEach(function(entry) { %>
+<% if (entry.type === 'purchase') { %>
+<b>Purchase:</b> <%= entry.display_name %><br />
+<% } %>
+<% }); %>
+<% } %>
+<% if (theEpisodes.subscription > 0) { %>
+<% theSources.forEach(function(entry) { %>
+<% if (entry.type === 'subscription') { %>
+<b>Subscription:</b> <%= entry.display_name %><br />
+<% } %>
+<% }); %>
+<% } %>
+<!-- <%= JSON.stringify(rez.results.web.episodes) %> -->

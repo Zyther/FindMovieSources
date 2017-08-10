@@ -1,0 +1,22 @@
+<% if(rez.error) { %><% if (rez.error.toString().startsWith('To filter shows by a specific channel, you must select a correct channel.')) { %><h3>No Results!</h3><% } } else { %>
+    <% if (rez.free_web_sources) { %>
+        <% rez.free_web_sources.forEach(function(entry) { %>
+        <b>Free:</b> <%=entry.display_name%> <br />
+        <% }); %>
+    <% } %>
+    <% if (rez.tv_everywhere_web_sources) { %>
+        <% rez.tv_everywhere_web_sources.forEach(function(entry) { %>
+        <b>TV Everywhere:</b> <%=entry.display_name%> <br />
+        <% }); %>
+    <% } %>
+    <% if (rez.subscription_web_sources) { %>
+        <% rez.subscription_web_sources.forEach(function(entry) { %>
+        <b>Subscription:</b> <%=entry.display_name%> <br />
+        <% }); %>
+    <% } %>
+    <% if (rez.purchase_web_sources) { %>
+        <% rez.purchase_web_sources.forEach(function(entry) { %>
+        <b>Purchase:</b> <%=entry.display_name%> <br />
+        <% }); %>
+    <% } %>
+<% } %>

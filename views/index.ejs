@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','REDACTED');</script>
+<!-- End Google Tag Manager -->
+    <title>FindMovieSources.com | Find Movie Sources</title>
+    <% include includes.ejs %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6093325272789010",
+    enable_page_level_ads: true
+  });
+</script>
+  <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=REDACTED"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <% include nav.ejs %>
+<div class="jumbotron">
+
+    <div class="aligncenter">
+      <h1><span class="icon-FMSLogo"></span> Find Movie Sources</h1>
+      <i>"If only I could search Netflix, Amazon Prime, Hulu, etc. from one place..."</i> <br /><br />
+      <form id="theForm">
+        <div class="form-group">
+          <input type="text" placeholder="Movie/TV Show/Program..." id="theInput" /> <input type="submit" value="Search" id="theButton">
+        </div>
+      </form>
+      <div id="broken"><h1>Seach is broken right now. Sorry! (Download the app instead!)</h1></div>
+      <div id="result"> </div>
+    </div>
+  </div>
+    <div id="thePOP">
+    <div id="theContainerTitle"><div id="theTitle"></div><div id="theType"></div></div><br />
+    <div id="theDescription"></div><br /><br />
+    <div class="row">
+      <div class="col-xs-12 col-md-6" id="theImage">
+
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <div id="theResult"></div><br />
+      </div>
+    </div>
+
+    <br />
+
+    <button class="thePOP_close">Close This</button>
+  </div>
+  <%include footer.ejs %>
+  </body>
+<script>
+  $('#theForm').submit(function(e){
+    e.preventDefault();
+    postInput();
+  });
+  $('#theButton').click(function(){
+    postInput();
+  });
+
+
+  function postInput(){
+    if ($('#theInput').val().length > 1) {
+      var theInput = $('#theInput').val();
+
+      // $.post('/queryMovie', {query: })
+      if (theInput !== '') {
+        $('#result').html('<h3>Loading...</h3>');
+        $.post('/getO', {query: theInput}, function (data) {
+          $('#result').html(data);
+        });
+        // alert(theInput);
+      } else {
+        alert('Please enter some sort of input');
+      }
+    } else {
+      $('#result').html('Please enter two or more characters to search.');
+    }
+
+  }
+
+  $('.sButton').on('click', function(e){
+    e.preventDefault();
+  });
+
+  function popSource(ID){
+    alert(ID);
+  }
+
+  function popTV(ID){
+    getData(1, ID);
+  }
+  function popMov(ID){
+    getData(2, ID);
+  }
+  function getNetflix() {
+    $('#theNetflix').html('&nbsp;');
+    var tFlix = $("#theTitle").text();
+    $.post('/getFlix', {query: tFlix}, function(data){
+    $("#theNetflix").html(data);
+  });
+  }
+
+  function getData(tvm, idd) {
+    $('#theResult').html('Loading..............');
+    if (tvm === 1) {
+      var tvmo = 'tv';
+    } else if (tvm === 2) {
+      var tvmo = 'mv';
+    } else {
+      var tvmo = 'zz';
+    }
+    //$('#theNetflix').html('');
+    $.post('/getGuideBox', {id: idd, tvmov: tvmo}, function(data){
+      $('#theResult').html(data);
+
+      //getNetflix();
+      if (tvm === 1){
+        runThis();
+      }
+
+    });
+  }
+  function runThis(ttID){
+      //var theID =
+      if ($('#theResult').html() == '<h3>No Results!</h3>') {
+      } else {
+        $('#theSources').html('Loading....');
+        setTimeout(function(){
+          var theGGID = $('#theGID').html();
+          $.post('/getGuideTV', {id: theGGID}, function(data){
+            $('#theSources').html(data);
+          });
+        }, 1000);
+      }
+
+  }
+
+  $(document).ready(function(){
+    $("#thePOP").popup({opacity: 0.4});
+  });
+  
+    function getDescription(id) {
+    $("#theDescription").html("&nbsp;");
+    $.get("http://omdbapi.com/?i="+id, function(d){
+      $("#theDescription").html(d.Plot);
+    });
+  }
+
+  function getNewSources(id, tvmov, img, title){
+    $("#theTitle").html("<h2>" + title  + "</h2>");
+    $("#theType").text(tvmov);
+    $("#theImage").html("<img src='"+img+"' width='50%' style='max-height:400px;' />");
+    //$("#theNetflix").html("&nbsp;");
+    $("#theResult").html("Loading...");
+    getDescription(id);
+    $.post('/getMobile', {id: id, tvmov: tvmov}, function(dd){
+      var tR = dd.replace(/(\s|\r|\n|\0|\t)/gmi, "");
+      if (tR === "") {
+        $("#theResult").html("<b>No Sources found!</b>");
+      } else {
+        console.log(tR);
+        $("#theResult").html(dd);
+      }
+      //getNetflix();
+
+    });
+  }
+
+</script>
+</html>

@@ -1,0 +1,11 @@
+<div ng-controller="cSearch as $ctrl">
+    <div class="container-fluid">
+        <div class="jumbotron searchPadding">
+            <h1 class="centerIt"><span class="icon-FMSLogo"></span> Find Movie Sources</h1>
+            <span class="centerIt"><i>"If only I could search Netflix, Amazon Prime, Hulu, etc. from one place..."</i></span>
+            <span class="centerIt">Updates on the way! Stay tuned! :)</span>
+            <span class="centerIt" ng-if="notBrowsing"><a class="btn btn-sm btn-default" ui-sref="search.term({term: '**browse'})" ui-sref-opts="{reload: true}"> Browse </a> or enter a search term above.</span>
+        </div>
+    </div>
+    <ui-view name="results"></ui-view>
+</div>

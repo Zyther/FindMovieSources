@@ -1,0 +1,104 @@
+<div controller="cSearchResult as ctrl" class="container-fluid">
+    <div ng-if="browseFlag">
+        <div class="container-fluid bgColor filterContainer">
+            <h3>Browse</h3>
+            <div class="advancedFilters notReady">Advanced Filters...</div>
+            <div class="row">
+                <div class="col-sm-4 filterMargin">
+                    Filter by Genre:
+                    <ui-select multiple class="inputHeight" ng-model="genreOutput.selected" sortable="true" theme="bootstrap" style="background: #000;">
+                        <ui-select-match placeholder="Select genres...">{{$item.name}}</ui-select-match>
+                        <ui-select-choices class="filterList"
+                                repeat="genre.id as genre in genreFilter | propsFilter: {name: $select.search}">
+                            <div style="color:#000; font-weight: 800;" ng-bind-html="genre.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-sm-4 filterMargin">
+                    Sorting Order:
+                    <ui-select class="blackBG" ng-model="sortOutput.selected" sortable="true" theme="bootstrap" class="" style="background: #000;">
+                        <ui-select-match placeholder="Select sort order...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices class="filterList"
+                                repeat="sortFilter.id as sortFilter in sortFilters | propsFilter: {name: $select.search}">
+                            <div style="color:#000; font-weight: 800;" ng-bind-html="sortFilter.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-sm-4 filterMargin">
+                    Filter by Type:
+                    <div class="btn-group fullwidth" data-toggle="buttons">
+                        <label class="btn btn-default halfWidth blackBG">
+                            <input type="checkbox" ng-model="filterMovies" ng-change="mF(filterMovies)">
+                            <span class="whiteText" ng-bind="movieFilter"></span>
+                        </label>
+                        <label class="btn btn-default halfWidth blackBG">
+                            <input class="showBtn" type="checkbox" ng-model="filterShows" ng-change="sF(filterShows)">
+                            <span class="whiteText" ng-bind="showFilter"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+
+                    <div class="col-xs-6"><button class="btn-primary btn fullwidth" ng-click="saveFilters(filterMovies, filterShows)">Save Filters</button></div>
+                    <div class="col-xs-6"><button class=" btn btn-danger fullwidth" ng-click="resetFilters()">Reset Filters</button></div>
+                </div>
+                <!--
+                FMS IS IN ALPHA, IF YOU'RE READING THIS, YOU'RE TRYING TO BREAK IT. WHY?
+                <div class="row">
+                    <div class="col-xs-12">
+                        Selection: Genres: {{genreOutput.selected}} <br />
+                        Shows: {{filterShows}} | Movies: {{filterMovies}}<br />
+                        Sort: {{sortOutput.selected}}
+                    </div>
+                </div>
+                -->
+            </div>
+            <br />
+        </div>
+        <br />
+    </div>
+
+    <div ng-if="searchTerm">
+        <div class="container-fluid bgColor"><h3>Results for "{{searchTerm}}"</h3>
+        <div ng-bind="noRes"></div>
+        </div>
+
+    </div>
+    <div ng-if="browseFlag">
+    <div class="container-fluid bgColor"><h3>Sorting by {{sortOrderName}}</h3>
+    <div ng-bind="noRes"></div>
+    </div>
+    </div>
+    <div ng-repeat="item in items | orderBy: sortBrowseBy:reverse " class="container-fluid">
+        <div class="row bgColor">
+        <br />
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+            <img ng-src="{{item.img}}" class="centerIt paddingBottom" />
+        </div>
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                <h2 style="margin-top: 0;">{{item.title}}</h2>
+                <div ng-if="item.link">
+                    <div ng-if="item.otitle !== item.title && item.otitle !== null">Original Title: {{item.otitle}}</div>
+                    <div>{{item.type}} | {{item.ratingtext}} <br /> {{item.yeartext}}</div>
+                    <!-- <div>{{item.popularity}}</div> -->
+                    <div ng-if="item.genres.length > 0">
+                        Genres: <span ng-repeat="(ig, genre) in item.genres">{{genre}}<span ng-if="!$last">, </span></span>
+                    </div>
+                    <div class="overview">{{item.overview.substr(0,400)}}...</div>
+                    <div>
+                        <br />
+                        <small><i>TMDBID: {{item.imdb}}</i></small>
+                        <hr />
+                        <button class="btn btn-info" ng-click="openM(item.imdb)">
+                            Find Sources...
+                        </button>
+                        <br /><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>

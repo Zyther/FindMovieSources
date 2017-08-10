@@ -1,0 +1,24 @@
+<% if (res.Response === "True") { %>
+<div class="row" style="width:100%">
+<% res.Search.forEach(function(e){ %>
+    <% if (e.Type === "series" || e.Type === "movie") { %>
+    <div class="col-xs-6 col-md-3" style="margin-bottom: 10px;">
+    <div class="panel panel-info" style="width: 80%; margin: 0 auto; padding: 0px;">
+        <div class="panel-heading"><%= e.Title%></div>
+        <div class="panel-body">
+            <% if (e.Poster === "N/A") { var tIMG = "https://assets.tmdb.org/assets/redacted/images/no-poster-w185-v2.png"; %>
+                <a href="#" class="thePOP_open" onclick='getNewSources("<%=e.imdbID%>","<%=e.Type%>", "http://www.what.fyi/img.php?url=<%=tIMG%>", "<%=e.Title%>")'><img src="<%=tIMG%>" height="200px" /></a>
+            <% } else { var tIMG = e.Poster%>
+                <a href="#" class="thePOP_open" onclick='getNewSources("<%=e.imdbID%>","<%=e.Type%>", "http://www.what.fyi/img.php?url=<%=tIMG%>", "<%=e.Title%>")'><img class="thePOP_open" src="http://www.what.fyi/img.php?url=<%=tIMG.toString()%>" data-src="<%=tIMG.toString()%>" height="200px" /></a>
+            <% } %>
+            <br /><%=e.Type%> / <%= e.imdbID %><br />
+        </div>
+        <div class="panel-footer"><a href="#" class="btn btn-info thePOP_open" onclick='getNewSources("<%=e.imdbID%>","<%=e.Type%>", "http://www.what.fyi/img.php?url=<%=tIMG%>", "<%=e.Title%>")'>Find Sources!</a></div>
+    </div>
+        </div>
+    <% } %>
+<% }); %>
+</div>
+<% } else { %>
+<h1>No Results!</h1>
+<% } %>
